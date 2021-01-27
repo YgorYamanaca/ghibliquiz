@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
   background-color: ${({ theme }) => theme.colors.mainBg};
@@ -6,6 +7,7 @@ const FooterWrapper = styled.footer`
   display: flex;
   align-items: center;
   border-radius: 4px; 
+  border: 2px solid ${({ theme }) => theme.colors.contrastText};
   img {
     width: 58px;
     margin-right: 23px;

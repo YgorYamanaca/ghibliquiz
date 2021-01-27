@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Widget = styled.div`
   display:flex;
@@ -34,10 +34,6 @@ Widget.Header = styled.header`
 `;
 
 Widget.Content = styled.div`
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
   background-color: ${({ theme }) => theme.colors.mainBg};
   text-align:center;
   padding: 24px 32px 32px 32px;
@@ -51,6 +47,45 @@ Widget.Content = styled.div`
     list-style: none;
     padding: 0;
   }
+  form {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+  }
+`;
+
+Widget.Input = styled.input`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:38px;
+    width:80%;
+    background-color: ${({ theme }) => theme.colors.mainBgAlpha};
+    color: ${({ theme }) => theme.colors.contrastText};
+    padding:5px 10px;
+    border: 0;
+    margin-top:33px;
+`;
+
+Widget.Button = styled.button`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:36px;
+    width:80%;
+    background-color: ${({ theme }) => theme.colors.primary};
+    color:${({ theme }) => theme.colors.contrastText};
+    cursor: ${(props) => !props.disabled && 'pointer'};
+    opacity: ${(props) => props.disabled && 0.5};
+    border:0;
+    :hover
+    {
+        border: 1px solid ${({ theme }) => theme.colors.contrastText};
+        border-color: ${(props) => props.disabled && 'transparent'};
+    }
+    margin-top:25px;
+    user-select: none;
 `;
 
 export default Widget;

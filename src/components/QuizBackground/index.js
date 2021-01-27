@@ -4,18 +4,18 @@ const QuizBackground = styled.div`
   width: 100%;
   background-size: cover;
   background-position: center;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-image: url(${({ backgroundImage1 }) => backgroundImage1});
   background-color: ${({ theme }) => theme.colors.mainBg};
   flex: 1;
   @media screen and (max-width: 500px) {
     background-image: none;
     &:after {
       content: "";
-      background-size: 75%;
+      background-size: 100%;
       background-position: center;
       background-image:
         linear-gradient(transparent, ${({ theme }) => theme.colors.mainBg}),
-        url(${({ backgroundImage }) => backgroundImage});
+        url(${({ backgroundImage2 }) => backgroundImage2});
       display: block;
       width: 100%;
       height: 180px;
