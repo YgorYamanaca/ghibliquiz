@@ -8,6 +8,7 @@ import QuizLogo from '../components/QuizLogo';
 import QuizBackground from '../components/QuizBackground';
 import Footer from '../components/Footer';
 import GitHubCorner from '../components/GitHubCorner';
+import CustomGhibliInput from '../components/CustomGhibliInput';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -38,8 +39,8 @@ export default function Home() {
               router.push(`/quiz?name=${name}`);
             }}
             >
-              <p>{db.description}</p>
-              <Widget.Input placeholder="Digite seu nome... 😉" onChange={(event) => setName(event.target.value)} />
+              <p style={{ margin: 0 }}>{db.description}</p>
+              <CustomGhibliInput placeholder="Digite seu nome... 😉" value={name} onChange={setName} />
               <Widget.Button type="submit" disabled={!name && true}>
                 Jogar... 🎮
               </Widget.Button>
