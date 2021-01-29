@@ -37,6 +37,19 @@ const GlobalStyle = createGlobalStyle`
       border:0;
       outline:0;
     }
+
+    @media (max-width:500px){
+      display:flex;
+      position:static;
+      margin:0;
+      justify-content:center;
+      background-color: ${({ theme }) => theme.colors.mainBg};
+      & > audio{
+      border:0;
+      outline:0;
+      margin:2%;
+    }
+    }
   }
 `;
 
@@ -49,9 +62,6 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={db.theme}>
-      <div className="songPlayerId">
-        <audio className="BackgroundMusic" placeholder="ouça" name="Coloque uma música para relaxar" ref={songPlayer} src={BackgroundSong} controls autoPlay type="audio/mpeg" />
-      </div>
       <Head>
         <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////APX19QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIiIAAAAAIiIiAAAAAAAAIiAAAAAAAAACAAEQARABEAAAEQEAABARAAARAQAAEBEAAAEQAAABEAAAAAAAAAAAACAAAAAAAAACIAAAAiAAAAIiAAACIAAAIiIAACIiAAAiIgAAIiIAACIiIAIiIiACIiIgAiIiIAIiAiAiIiIiAiIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA" rel="icon" type="image/x-icon" />
         <meta name="og:title" content={db.title} />
@@ -62,6 +72,9 @@ export default function App({ Component, pageProps }) {
       </Head>
       <GlobalStyle />
       <Component {...pageProps} />
+      <div className="songPlayerId">
+        <audio className="BackgroundMusic" placeholder="ouça" name="Coloque uma música para relaxar" ref={songPlayer} src={BackgroundSong} controls autoPlay type="audio/mpeg" />
+      </div>
     </ThemeProvider>
   );
 }
