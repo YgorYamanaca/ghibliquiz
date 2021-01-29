@@ -59,7 +59,20 @@
       ]
     }
   ],
-  "external": [""],
+  "external": [
+    {
+      "url": "https://lotr-quiz.filipe1309.vercel.app/",
+      "name": "Quiz do Senhor dos Anéis"
+    },
+    {
+      "url": "https://quiz-nextjs.vercel.app/",
+      "name": "PokeQuiz"
+    },
+    {
+      "url": "https://miziaraquiz-ev3nrvdt3.vercel.app/",
+      "name": "Batman Quiz!"
+    }
+  ],
   "theme": {
     "colors": {
       "primary": "#1371B0",

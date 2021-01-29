@@ -1,20 +1,25 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useRouter } from 'next/router';
 import db from '../../db.json';
 import Widget from '../components/Widget';
 import QuizLogo from '../components/QuizLogo';
 import QuizBackground from '../components/QuizBackground';
 import QuizContainer from '../components/QuizContainer';
+import TotoroIcon from '../customIcon/totoro';
+import QuizResponse from '../components/QuizResponse';
 
 function LoadingWidget() {
   return (
     <Widget>
+      <Widget.Header>
+        Loading ...
+      </Widget.Header>
       <Widget.Content>
         <Widget.Animationcontainer>
           <div className="spinner1" />
           <img src="https://media0.giphy.com/media/KEVODnr6kaJws/200w.webp?cid=ecf05e47gjidevcl98ilgg5cmlm1u9qj6qvsrdlngu9x1k34&rid=200w.webp" alt="gif" />
         </Widget.Animationcontainer>
-        Loading ...
       </Widget.Content>
     </Widget>
   );
@@ -25,12 +30,16 @@ function QuestionWidget({
   questionIndex,
   totalQuestions,
   onSubmit,
+  addResult,
 }) {
-  const questionId = `question__${questionIndex}`;
+  const [selectedQ, setSelected] = React.useState();
+  const [isSubmited, setSubmited] = React.useState(false);
+  const isCorrect = selectedQ === question.answer;
+  const router = useRouter();
+  const { name } = router.query;
   return (
     <Widget>
       <Widget.Header>
-        {/* <BackLinkArrow href="/" /> */}
         <h3>
           {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
         </h3>
@@ -56,34 +65,36 @@ function QuestionWidget({
         <form
           onSubmit={(infosDoEvento) => {
             infosDoEvento.preventDefault();
-            onSubmit();
+            setSubmited(true);
+            setTimeout(() => {
+              addResult(isCorrect);
+              onSubmit();
+              setSubmited(false);
+              setSelected(undefined);
+            }, 3 * 1000);
           }}
         >
           {question.alternatives.map((alternative, index) => {
             const alternativeId = `alternative__${index}`;
             return (
               <Widget.Topic
-                as="label"
-                htmlFor={alternativeId}
                 key={alternativeId}
+                onClick={() => setSelected(index + 1)}
+                selected={selectedQ === index + 1}
               >
-                <input
-                  id={alternativeId}
-                  name={questionId}
-                  type="radio"
-                />
+                {selectedQ === index + 1 && TotoroIcon()}
                 {alternative}
               </Widget.Topic>
             );
           })}
-
-          {/* <pre>
-            {JSON.stringify(question, null, 4)}
-          </pre> */}
-          <Widget.Button type="submit">
+          <Widget.Button type="submit" disabled={!selectedQ && true}>
             Confirmar
           </Widget.Button>
         </form>
+
+        {isSubmited && (
+          <QuizResponse isRight={isCorrect} nameOfUser={name} answer={question.answer} />
+        )}
       </Widget.Content>
     </Widget>
   );
@@ -97,22 +108,26 @@ const screenStates = {
 
 export default function QuizPage() {
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
-  const totalQuestions = db.questions.length;
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [results, setResults] = React.useState([]);
+  const totalQuestions = db.questions.length;
   const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
+  const router = useRouter();
+  const { name } = router.query;
 
-  // [React chama de: Efeitos || Effects]
-  // React.useEffect
-  // atualizado === willUpdate
-  // morre === willUnmount
   React.useEffect(() => {
-    // fetch() ...
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
-    }, 1 * 2000);
-  // nasce === didMount
+    }, 1 * 1500);
   }, []);
+
+  function addResult(result) {
+    setResults([
+      ...results,
+      result,
+    ]);
+  }
 
   function handleSubmitQuiz() {
     const nextQuestion = questionIndex + 1;
@@ -120,6 +135,10 @@ export default function QuizPage() {
       setCurrentQuestion(nextQuestion);
     } else {
       setScreenState(screenStates.RESULT);
+
+      setTimeout(() => {
+        router.push('/');
+      }, 5 * 1000);
     }
   }
 
@@ -133,12 +152,37 @@ export default function QuizPage() {
             questionIndex={questionIndex}
             totalQuestions={totalQuestions}
             onSubmit={handleSubmitQuiz}
+            addResult={addResult}
           />
         )}
-
         {screenState === screenStates.LOADING && <LoadingWidget />}
-
-        {screenState === screenStates.RESULT && <div>Você acertou X questões, parabéns!</div>}
+        {screenState === screenStates.RESULT && (
+          <Widget>
+            <Widget.Header>
+              {`${name}, você acertou ${results.filter((x) => x).length} ${results.filter((x) => x).length > 1 ? 'questões' : 'questão'} de ${totalQuestions}.`}
+            </Widget.Header>
+            <Widget.Content>
+              <img
+                style={{
+                  width: '100%',
+                  height: '150px',
+                  objectFit: 'cover',
+                  marginBottom: '15px',
+                }}
+                src={results.filter((x) => x).length >= (totalQuestions / 2)
+                  ? 'https://media.giphy.com/media/WtO0orBf8SpxGycTWc/giphy.gif'
+                  : 'https://media.giphy.com/media/ChX3hzy5CkXsI/giphy.gif'}
+                alt="totoro"
+              />
+              {results.filter((x) => x).length >= (totalQuestions / 2)
+                ? 'Parabéns, você conhece bem o estúdio Ghibli 🥺'
+                : 'Você precisa assistir mais filmes do estúdio Ghibli 😥'}
+              <div>
+                (Você vai voltar para a tela inicial)
+              </div>
+            </Widget.Content>
+          </Widget>
+        )}
       </QuizContainer>
     </QuizBackground>
   );

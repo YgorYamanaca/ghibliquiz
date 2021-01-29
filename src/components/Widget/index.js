@@ -1,5 +1,14 @@
 import styled, { keyframes } from 'styled-components';
 
+const show = keyframes`
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+`;
+
 const Widget = styled.div`
   display:flex;
   flex-direction:column;
@@ -19,6 +28,7 @@ const Widget = styled.div`
     font-weight: 400;
     line-height: 1.25;
   }
+  animation: ${show} 1s linear none;
 `;
 
 Widget.Header = styled.header`
@@ -66,10 +76,10 @@ Widget.Button = styled.button`
   cursor: ${(props) => (!props.disabled ? 'pointer' : 'not-allowed')};
   opacity: ${(props) => props.disabled && 0.5};
   border:0;
+  outline:0;
   :hover
   {
-      border: 1px solid ${({ theme }) => theme.colors.contrastText};
-      border-color: ${(props) => props.disabled && 'transparent'};
+      border: ${(props) => !props.disabled && `1px solid ${props.theme.colors.contrastText}`};
   }
   margin-top:25px;
   user-select: none;
@@ -89,13 +99,14 @@ const rotate = keyframes`
 Widget.Animationcontainer = styled.div`
   position: relative !important;
   img {
-    height:150px;
-    width:150px;
+    height:145px;
+    width:145px;
     border-radius: 50%;
+    margin-bottom: 10px;
   }
   .spinner1 {
-    height: 155px;
-    width: 155px;
+    height: 150px;
+    width: 150px;
     position: absolute !important;
     left: 50%;
     margin-left: -75px;
@@ -103,34 +114,34 @@ Widget.Animationcontainer = styled.div`
     margin-top: -80px;
     z-index: 100 !important;
     border-radius: 50%;
-    border-width: 5px;
+    border-width: 10px;
     border-style: solid;
-    border-color: #fff transparent transparent transparent;
-    animation: ${rotate} 1s linear infinite;
+    border-color: ${({ theme }) => theme.colors.contrastText} transparent transparent transparent;
+    animation: ${rotate} 1.5s linear infinite;
   }
 `;
 
-Widget.Topic = styled.a`
+Widget.Topic = styled.div`
+  display:flex;
+  min-height:40px;
+  justify-content:center;
+  align-items:center;
   outline: 0;
-  text-align:center;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.contrastText};
   background-color: ${({ theme }) => `${theme.colors.primary}40`};
-  padding: 10px 15px;
+  padding: 5px 15px;
   margin-bottom: 8px;
   cursor: pointer;
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: .3s;
-  display: block;
   width:100%;
-  &:hover,
-  &:focus {
-    opacity: .5;
+  &:hover{
+    opacity: .9;
+    background-color: ${({ theme }) => `${theme.colors.primary}`};
   }
-
-  & >  input{
-    margin-right:15px;
-  }
+  background-color: ${(props) => props.selected && `${props.theme.colors.primary}`};
+  border:${(props) => props.selected && `1px solid ${props.theme.colors.contrastText}`};
 `;
 
 export default Widget;

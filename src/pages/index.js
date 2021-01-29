@@ -1,7 +1,7 @@
+/* eslint-disable max-len */
 import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-
 import db from '../../db.json';
 import Widget from '../components/Widget';
 import QuizLogo from '../components/QuizLogo';
@@ -50,8 +50,7 @@ export default function Home() {
 
         <Widget>
           <Widget.Content>
-            <h1>Quizes da Galera</h1>
-            <p>lorem ipsum dolor sit amet...</p>
+            {db.external.map((quiz) => <Widget.Topic key={quiz.url} href={quiz.url}>{quiz.name}</Widget.Topic>)}
           </Widget.Content>
         </Widget>
 

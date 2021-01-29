@@ -1,5 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const show = keyframes`
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+`;
 
 const FooterWrapper = styled.footer`
   background-color: ${({ theme }) => theme.colors.mainBg};
@@ -24,6 +33,7 @@ const FooterWrapper = styled.footer`
       text-decoration: underline;
     }
   }
+  animation: ${show} 1s linear none;
 `;
 
 export default function Footer(props) {
