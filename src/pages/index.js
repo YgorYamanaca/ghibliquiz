@@ -65,7 +65,7 @@ export default function Home() {
                   as={Link}
                   disabled={!name && true}
                   key={quizExterno.url}
-                  href={`/quiz/${projectName}___${githubUser}?name=${name}`}
+                  href={name && `/quiz/${projectName}___${githubUser}?name=${name}`}
                 >
                   {quizExterno.name}
                 </Widget.Topic>

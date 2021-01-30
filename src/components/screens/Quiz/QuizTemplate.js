@@ -219,7 +219,18 @@ export default function QuizTeamplate({ questions, bg, externalData = false }) {
       {!externalData
         && (
         <div className="songPlayerId">
-          <audio className="BackgroundMusic" placeholder="ouça" name="Coloque uma música para relaxar" ref={songPlayer} src={BackgroundSong} controls controlsList="nodownload" autoPlay type="audio/mpeg" onPause={() => router.push('/')} />
+          <audio
+            className="BackgroundMusic"
+            placeholder="ouça"
+            name="Coloque uma música para relaxar"
+            ref={songPlayer}
+            src={BackgroundSong}
+            controls
+            controlsList="nodownload"
+            autoPlay
+            type="audio/mpeg"
+            onPause={() => { if (results.length === totalQuestions) router.push('/'); }}
+          />
         </div>
         )}
     </QuizBackground>
