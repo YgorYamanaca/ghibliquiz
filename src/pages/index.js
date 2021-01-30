@@ -62,10 +62,10 @@ export default function Home() {
                 .split('.');
               return (
                 <Widget.Topic
-                  as={Link}
+                  as={name && Link}
                   disabled={!name && true}
                   key={quizExterno.url}
-                  href={name && `/quiz/${projectName}___${githubUser}?name=${name}`}
+                  href={`/quiz/${projectName}___${githubUser}?name=${name}`}
                 >
                   {quizExterno.name}
                 </Widget.Topic>
