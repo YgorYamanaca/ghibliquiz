@@ -9,6 +9,7 @@ import QuizBackground from '../components/QuizBackground';
 import Footer from '../components/Footer';
 import GitHubCorner from '../components/GitHubCorner';
 import CustomGhibliInput from '../components/CustomGhibliInput';
+import Link from '../components/Link';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -26,7 +27,10 @@ export default function Home() {
   const [name, setName] = React.useState('');
 
   return (
-    <QuizBackground backgroundImage1={db.bg} backgroundImage2="https://cdn.vox-cdn.com/thumbor/aOGWZ8-5roYzcjZGllxOE7K8CWE=/928x1304:3696x2753/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/19996673/Studio_Ghibli_Logo.jpg">
+    <QuizBackground
+      backgroundImage1={db.bg}
+      backgroundImage2="https://cdn.vox-cdn.com/thumbor/aOGWZ8-5roYzcjZGllxOE7K8CWE=/928x1304:3696x2753/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/19996673/Studio_Ghibli_Logo.jpg"
+    >
       <QuizContainer>
         <QuizLogo />
         <Widget>
@@ -50,7 +54,23 @@ export default function Home() {
 
         <Widget>
           <Widget.Content>
-            {db.external.map((quiz) => <Widget.Topic key={quiz.url} href={quiz.url}>{quiz.name}</Widget.Topic>)}
+            {db.external.map((quizExterno) => {
+              const [projectName, githubUser] = quizExterno.url
+                .replace(/\//g, '')
+                .replace('https:', '')
+                .replace('.vercel.app', '')
+                .split('.');
+              return (
+                <Widget.Topic
+                  as={Link}
+                  disabled={!name && true}
+                  key={quizExterno.url}
+                  href={`/quiz/${projectName}___${githubUser}?name=${name}`}
+                >
+                  {quizExterno.name}
+                </Widget.Topic>
+              );
+            })}
           </Widget.Content>
         </Widget>
 

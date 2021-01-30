@@ -33,7 +33,7 @@ const FooterWrapper = styled.footer`
       text-decoration: underline;
     }
   }
-  animation: ${show} 1s linear none;
+  animation: ${show} 1.5s ease-out none;
 `;
 
 export default function Footer(props) {

@@ -5,13 +5,10 @@ module.exports = {
       use: [
         options.defaultLoaders.babel,
         {
-          loader: 'file-loader',
-          // eslint-disable-next-line no-dupe-keys
           loader: 'url-loader',
         },
       ],
     });
-
     return config;
   },
 };

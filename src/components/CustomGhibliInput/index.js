@@ -7,7 +7,7 @@ const InputContainer = styled.div`
   align-items:center;
   width:80%;
   height:38px;
-  background-color: ${({ theme }) => theme.colors.mainBgAlpha};
+  background-color: ${({ theme }) => theme.colors.contrastText};
   padding:0 10px;
   margin-top:25px;
   border-radius:6px;
@@ -17,7 +17,7 @@ const InputContainer = styled.div`
     outline:0;
     border:0;
     background-color:transparent;
-    color: ${({ theme }) => theme.colors.contrastText};
+    color: ${({ theme }) => theme.colors.mainBg};
     font-size:15px;
   }
 `;

@@ -28,7 +28,7 @@ const Widget = styled.div`
     font-weight: 400;
     line-height: 1.25;
   }
-  animation: ${show} 1s linear none;
+  animation: ${show} 1s ease-out none;
 `;
 
 Widget.Header = styled.header`
@@ -55,6 +55,15 @@ Widget.Content = styled.div`
   ul {
     list-style: none;
     padding: 0;
+    line-height: 2.5;
+    text-align: center;
+    border: 1px solid ${({ theme }) => theme.colors.contrastText};
+    li.result_true {
+      color: ${({ theme }) => theme.colors.success};
+    }
+    li.result_false {
+      color: ${({ theme }) => theme.colors.wrong};
+    }
   }
   form {
     display:flex;
@@ -98,6 +107,7 @@ const rotate = keyframes`
 
 Widget.Animationcontainer = styled.div`
   position: relative !important;
+  height:${(props) => props.externalData && '145px'};
   img {
     height:145px;
     width:145px;
@@ -117,7 +127,7 @@ Widget.Animationcontainer = styled.div`
     border-width: 10px;
     border-style: solid;
     border-color: ${({ theme }) => theme.colors.contrastText} transparent transparent transparent;
-    animation: ${rotate} 1.5s linear infinite;
+    animation: ${rotate} 1s ease infinite;
   }
 `;
 
@@ -132,16 +142,22 @@ Widget.Topic = styled.div`
   background-color: ${({ theme }) => `${theme.colors.primary}40`};
   padding: 5px 15px;
   margin-bottom: 8px;
-  cursor: pointer;
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: .3s;
   width:100%;
   &:hover{
-    opacity: .9;
-    background-color: ${({ theme }) => `${theme.colors.primary}`};
-  }
+    ${(props) => !props.isSelected && !props.disabled && `
+      opacity: .9;
+      background-color: ${props.theme.colors.primary}};
+      cursor: pointer;
+    `}
+    user-select: none;
+  };
   background-color: ${(props) => props.selected && `${props.theme.colors.primary}`};
   border:${(props) => props.selected && `1px solid ${props.theme.colors.contrastText}`};
+  user-select: none;
+  cursor: ${(props) => (!props.disabled ? 'pointer' : 'not-allowed')};
+  opacity: ${(props) => props.disabled && 0.5};
 `;
 
 export default Widget;
