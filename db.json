@@ -6,7 +6,7 @@
     {
       "image": "https://media.giphy.com/media/c2ABhPQs7uUYo/giphy.gif",
       "title": "Qual o nome do personagem a cima?",
-      "answer": 1,
+      "answer": 0,
       "alternatives": [
         "Kodama",
         "Kaonashi",
@@ -17,7 +17,7 @@
     {
       "image": "https://media4.giphy.com/media/BYKhjYSmNnbnG/200w.webp?cid=ecf05e47hd4hmnpjnbxcttaegc4cthok2uolg75yckd6nz9v&rid=200w.webp",
       "title": "Qual o nome do filme?",
-      "answer": 3,
+      "answer": 2,
       "alternatives": [
         "O Castelo no Céu - Tenkū no Shiro Rapyuta",
         "A Viagem de Chihiro - Sen to Chihiro no Kamikakushi",
@@ -28,7 +28,7 @@
     {
       "image": "https://media.giphy.com/media/yypfH0eh8s9bO/giphy.gif",
       "title": "Qual o objetivo dessa personagem?",
-      "answer": 4,
+      "answer": 3,
       "alternatives": [
         "Se tornar uma rainha",
         "Ir para a Lua",
@@ -39,7 +39,7 @@
     {
       "image": "https://media.giphy.com/media/tAsb13a9tibQs/giphy.gif",
       "title": "Qual o nome do casal a cima?",
-      "answer": 2,
+      "answer": 1,
       "alternatives": [
         "Sheeta - Pazu",
         "Howl - Sophie",
@@ -50,7 +50,7 @@
     {
       "image": "https://media.giphy.com/media/fwqAg6ZS6ebL2/giphy.gif",
       "title": "Qual o nome verdadeiro do personagem a cima?",
-      "answer": 4,
+      "answer": 3,
       "alternatives": [
         "Porco Rosso",
         "Donald Curtis",

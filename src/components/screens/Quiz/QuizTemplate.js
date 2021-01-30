@@ -81,16 +81,16 @@ function QuestionWidget({
             return (
               <Widget.Topic
                 key={alternativeId}
-                onClick={() => !isSubmited && setSelected(index + 1)}
-                selected={selectedQ === index + 1}
+                onClick={() => !isSubmited && setSelected(index)}
+                selected={selectedQ === index}
                 isSelected={isSubmited}
               >
-                {!externalData && selectedQ === index + 1 && TotoroIcon()}
+                {!externalData && selectedQ === index && TotoroIcon()}
                 {alternative}
               </Widget.Topic>
             );
           })}
-          <Widget.Button type="submit" disabled={!selectedQ && true}>
+          <Widget.Button type="submit" disabled={selectedQ === undefined && true}>
             Confirmar
           </Widget.Button>
         </form>

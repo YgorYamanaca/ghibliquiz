@@ -55,7 +55,7 @@ export default function QuizResponse({ nameOfUser, isRight, answer }) {
       <div className="responseText">
         {isRight
           ? `${nameOfUser}, você acertou a questão!`
-          : `${nameOfUser}, você errou, a opção correta é ${answer} !`}
+          : `${nameOfUser}, você errou, a opção correta é ${answer + 1} !`}
       </div>
       <Lottie
         className="animationDiv"
